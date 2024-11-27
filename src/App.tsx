@@ -1,5 +1,5 @@
 function App() {
-  return <div className="flex w-full text-red-600 text-4xl">awegnekwgnwejg</div>;
+  return <div className="w-screen h-screen flex justify-center items-center">이건 프리텐다드</div>;
 }
 
 export default App;
