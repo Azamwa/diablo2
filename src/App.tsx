@@ -1,5 +1,11 @@
+import HuntCount from "./components/HuntCount";
+
 function App() {
-  return <div className="w-screen h-screen flex justify-center items-center">이건 프리텐다드</div>;
+  return (
+    <div className="w-screen h-screen flex flex-col justify-center items-center bg-black">
+      <HuntCount />
+    </div>
+  );
 }
 
 export default App;
