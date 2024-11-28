@@ -1,4 +1,4 @@
-import HuntCount from "./components/HuntCount";
+import HuntCount from "./components/hunt/HuntCount";
 
 function App() {
   return (
