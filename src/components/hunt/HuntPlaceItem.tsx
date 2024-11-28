@@ -28,17 +28,17 @@ const HuntPlaceItem = ({ place, changeHuntPlace }: HuntPlaceItemType) => {
 
   return (
     <TableRow>
-      <TableCell className="font-semibold text-xl">{place.name}</TableCell>
-      <TableCell className="">
-        <Button className="h-10 text-xl bg-slate-900" onClick={() => handleCountPlace(-1)}>
+      <TableCell className="font-semibold text-base">{place.name}</TableCell>
+      <TableCell>
+        <Button className="h-8 text-xl bg-slate-900" onClick={() => handleCountPlace(-1)}>
           -
         </Button>
-        <span className="inline-block w-14 text-lg">{place.count}</span>
-        <Button className="h-10 text-xl bg-slate-900" onClick={() => handleCountPlace(1)}>
+        <span className="inline-block w-14 text-base font-semibold">{place.count}</span>
+        <Button className="h-8 text-xl bg-slate-900" onClick={() => handleCountPlace(1)}>
           +
         </Button>
       </TableCell>
-      <TableCell className="h-20">
+      <TableCell>
         <Dialog>
           <DialogTrigger asChild>
             <div className="w-full h-8 flex gap-2 items-center">

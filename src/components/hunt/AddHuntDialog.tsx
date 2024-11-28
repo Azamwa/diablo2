@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { KeyboardEvent, useRef } from "react";
 import {
   DialogClose,
   DialogContent,
@@ -20,6 +20,7 @@ interface AddHuntDialogProps {
 const AddHuntDialog = ({ place, changeHuntPlace }: AddHuntDialogProps) => {
   const placeRef = useRef<HTMLInputElement>(null);
   const itemRef = useRef<HTMLInputElement>(null);
+  const dialogCloseRef = useRef<HTMLButtonElement>(null);
   const handleAddItem = () => {
     if (placeRef.current === null || itemRef.current === null) {
       return;
@@ -42,10 +43,16 @@ const AddHuntDialog = ({ place, changeHuntPlace }: AddHuntDialogProps) => {
     changeHuntPlace(updatedPlace);
   };
 
+  const handleSubmitEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && dialogCloseRef.current !== null) {
+      dialogCloseRef.current.click();
+    }
+  };
+
   return (
     <DialogContent className="sm:max-w-[450px]">
       <DialogHeader>
-        <DialogTitle className="text-xl">득템 입력</DialogTitle>
+        <DialogTitle className="text-lg">득템 입력</DialogTitle>
       </DialogHeader>
       <DialogDescription />
       <div className="grid gap-4 py-4">
@@ -65,12 +72,18 @@ const AddHuntDialog = ({ place, changeHuntPlace }: AddHuntDialogProps) => {
           <Label htmlFor="username" className="text-slate-400 text-right text-base">
             추가할 아이템
           </Label>
-          <Input ref={itemRef} id="username" className="col-span-3 text-lg" />
+
+          <Input
+            ref={itemRef}
+            id="username"
+            className="col-span-3 text-lg"
+            onKeyDown={e => handleSubmitEnter(e)}
+          />
         </div>
       </div>
       <DialogFooter>
         <DialogClose asChild>
-          <Button type="submit" onClick={handleAddItem}>
+          <Button type="submit" ref={dialogCloseRef} onClick={handleAddItem} tabIndex={0}>
             저장
           </Button>
         </DialogClose>
