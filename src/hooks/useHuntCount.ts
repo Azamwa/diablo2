@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HuntPlaceType } from "@/lib/type";
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -21,10 +21,10 @@ const initialItem = [
 ];
 
 export const useHuntCount = () => {
-  const { storageItem } = useLocalStorage("place");
+  const { storageItem, setLocalStorage } = useLocalStorage("place");
 
   const [huntPlace, setHuntPlace] = useState<HuntPlaceType[]>(
-    JSON.parse(storageItem.value ?? JSON.stringify(initialItem)),
+    JSON.parse(storageItem.value ?? "[]"),
   );
 
   const addPlace = (newPlace: string) => {
@@ -37,6 +37,13 @@ export const useHuntCount = () => {
       return prev.with(updatedIndex, updatedPlace);
     });
   };
+
+  useEffect(() => {
+    if (storageItem.value === null) {
+      setLocalStorage(initialItem);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return { huntPlace, addPlace, changeHuntPlace };
 };
