@@ -32,10 +32,13 @@ export const useHuntCount = () => {
   };
 
   const changeHuntPlace = (updatedPlace: HuntPlaceType) => {
-    setHuntPlace(prev => {
-      const updatedIndex = prev.findIndex(place => place.name === updatedPlace.name);
-      return prev.with(updatedIndex, updatedPlace);
-    });
+    setHuntPlace(prev => getUpdatedHuntPlace(prev, updatedPlace));
+    setLocalStorage(getUpdatedHuntPlace(huntPlace, updatedPlace));
+  };
+
+  const getUpdatedHuntPlace = (prev: HuntPlaceType[], updatedPlace: HuntPlaceType) => {
+    const updatedIndex = prev.findIndex(place => place.name === updatedPlace.name);
+    return prev.with(updatedIndex, updatedPlace);
   };
 
   useEffect(() => {
